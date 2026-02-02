@@ -16,15 +16,9 @@ class TForm1 : public TForm
   public:      // User declarations
     __fastcall TForm1(TComponent *Owner);
 
-    TEddyButton *pTestBtn = new TEddyButton(this);
-
-    pTestBtn->Parent = this;
-    pTestBtn->Left = 20;
-    pTestBtn->Top = 20;
-    pTestBtn->Caption = L"Eddy Theme Button";
+    TEddyButton *pTestBtn = nullptr;
 
 
-    this->DoubleBuffered = true; // ±ôºıÀÓ ¹æÁö
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TForm1 *Form1;

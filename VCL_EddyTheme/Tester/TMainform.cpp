@@ -9,8 +9,16 @@
 #pragma resource "*.dfm"
 TForm1 *Form1;
 //---------------------------------------------------------------------------
-__fastcall TForm1::TForm1(TComponent* Owner)
-	: TForm(Owner)
+__fastcall TForm1::TForm1(TComponent *Owner) : TForm(Owner)
 {
+
+    this->DoubleBuffered = true; // ±ôºýÀÓ ¹æÁö
+    pTestBtn = new TEddyButton(this);
+
+    pTestBtn->Parent = this;
+    pTestBtn->Left = 20;
+    pTestBtn->Top = 20;
+    pTestBtn->Caption = L"Eddy Theme Button";
 }
 //---------------------------------------------------------------------------
+
