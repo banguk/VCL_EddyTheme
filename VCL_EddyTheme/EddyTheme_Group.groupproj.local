@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>1899-12-30 00:00:00.000.685,C:\Users\suwoo_\Documents\Embarcadero\Studio\Projects\ProjectGroup1.groupproj=D:\[001]_Project\[PP]_Project\EddyTheme\EddyTheme_Group.groupproj</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.685,D:\[001]_Project\[PP]_Project\EddyTheme\EddyTheme_Group.groupproj=C:\Users\suwoo_\Documents\Embarcadero\Studio\Projects\ProjectGroup1.groupproj</Transaction>
   </Transactions>
 	<Default.Personality>
-		<Projects ActiveProject="D:\[001]_Project\[PP]_Project\EddyTheme\VCL_EddyTheme\EddyThemeKit\EddyThemeKit.cbproj"/>
+		<Projects ActiveProject="D:\[001]_Project\[PP]_Project\EddyTheme\VCL_EddyTheme\Tester\EddyThemeTester.cbproj"/>
 	</Default.Personality>
 </BorlandProject>
