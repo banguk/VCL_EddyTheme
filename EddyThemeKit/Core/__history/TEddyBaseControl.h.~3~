@@ -1,0 +1,90 @@
+//---------------------------------------------------------------------------
+
+#ifndef TEddyBaseControlH
+#define TEddyBaseControlH
+//---------------------------------------------------------------------------
+#include "EddyThemeManager.h"
+#include <System.Classes.hpp>
+#include <Vcl.Controls.hpp>
+#include <Vcl.Graphics.hpp>
+
+class PACKAGE TEddyBaseControl : public TCustomControl
+{
+  private:
+    bool isMouseOver_;
+    bool isFocused_;
+    bool isMouseDown_
+
+        protected :
+        // --- VCL 메시지 핸들러 (WinForms의 OnMouseEnter 등의 기반) ---
+        virtual void __fastcall CMMouseEnter(TMessage &Message);
+    virtual void __fastcall CMMouseLeave(TMessage &Message);
+    virtual void __fastcall WMEraseBkgnd(TWMEraseBkgnd &Message); // 깜빡임 방지용
+    virtual void __fastcall WMSetFocus(TWMSetFocus &Message);
+    virtual void __fastcall WMKillFocus(TWMKillFocus &Message);
+    virtual void __fastcall MouseDown(TMouseButton Button, TShiftState Shift, int X, int Y) override;
+    virtual void __fastcall MouseUp(TMouseButton Button, TShiftState Shift, int X, int Y) override;
+
+    // --- 커스텀 그리기 파이프라인 ---
+    virtual void __fastcall Paint() override;
+
+    // 자식 클래스가 구현해야 할 순수 가상 함수 (Content Drawing)
+    virtual void __fastcall PaintContent(TCanvas *pCanvas, const TRect &rect) = 0;
+
+    // --- Helper Methods ---
+    TEddyThemeManager *__fastcall GetTheme();
+    TColor __fastcall GetCurrentBackgroundColor(); // 상태(Hover/None)에 따른 배경색 자동 계산
+
+    // 상태 확인용 프로퍼티 (자식 클래스용)
+    __property bool IsMouseOver = {read = isMouseOver_};
+    __property bool IsFocused = {read = isFocused_};
+    __property bool IsMouseDown = {read = isMouseDown_};
+
+    // VCL Message Map
+    BEGIN_MESSAGE_MAP
+    VCL_MESSAGE_HANDLER(CM_MOUSEENTER, TMessage, CMMouseEnter)
+    VCL_MESSAGE_HANDLER(CM_MOUSELEAVE, TMessage, CMMouseLeave)
+    VCL_MESSAGE_HANDLER(WM_ERASEBKGND, TWMEraseBkgnd, WMEraseBkgnd)
+    VCL_MESSAGE_HANDLER(WM_SETFOCUS, TWMSetFocus, WMSetFocus)
+    VCL_MESSAGE_HANDLER(WM_KILLFOCUS, TWMKillFocus, WMKillFocus)
+    END_MESSAGE_MAP(TCustomControl)
+
+  public:
+    __fastcall TEddyBaseControl(TComponent *Owner);
+    __fastcall ~TEddyBaseControl();
+
+  __published:
+    // --- 표준 VCL 속성 노출 ---
+    // 개발자가 Object Inspector에서 설정 가능한 속성들
+    __property Align;
+    __property Anchors;
+    __property Cursor;
+    __property Enabled;
+    __property Font;
+    __property Hint;
+    __property ParentFont;
+    __property ParentShowHint;
+    __property PopupMenu;
+    __property ShowHint;
+    __property TabOrder;
+    __property TabStop default true; // 기본적으로 포커스 받음
+    __property Visible;
+
+    // --- 표준 이벤트 ---
+    __property OnClick;
+    __property OnContextPopup;
+    __property OnDblClick;
+    __property OnEnter; // Focus Enter
+    __property OnExit;  // Focus Leave
+    __property OnKeyDown;
+    __property OnKeyPress;
+    __property OnKeyUp;
+    __property OnMouseDown;
+    __property OnMouseEnter;
+    __property OnMouseLeave;
+    __property OnMouseMove;
+    __property OnMouseUp;
+    __property OnResize;
+};
+#endif
+

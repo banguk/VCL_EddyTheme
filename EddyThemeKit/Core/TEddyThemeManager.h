@@ -1,0 +1,61 @@
+//---------------------------------------------------------------------------
+
+#ifndef TEddyThemeManagerH
+#define TEddyThemeManagerH
+//---------------------------------------------------------------------------
+
+#include <System.Classes.hpp>
+#include <Vcl.Graphics.hpp>
+
+enum class TEddyThemeMode
+{
+    Light,
+    Dark
+};
+
+struct TEddyPalette
+{
+    TColor Background;    // 기본 배경색
+    TColor Surface;       // 컨트롤 배경색 (버튼, 패널 등)
+    TColor Text;          // 기본 텍스트
+    TColor TextSecondary; // 보조 텍스트 (비활성 등)
+    TColor Border;        // 테두리
+    TColor Accent;        // 강조 색상 (클릭, 활성 등)
+    TColor Hover;         // 마우스 오버 시 색상
+};
+
+class PACKAGE TEddyThemeManager
+{
+  private:
+    static TEddyThemeManager *pInstance_;
+
+    // Private Members
+    TEddyThemeMode currentMode_;
+    TEddyPalette lightPalette_;
+    TEddyPalette darkPalette_;
+
+    __fastcall TEddyThemeManager();
+    __fastcall ~TEddyThemeManager();
+
+    // 내부 초기화 함수
+    void __fastcall InitPalettes();
+
+  public:
+    // Singleton
+    static TEddyThemeManager *__fastcall Instance();
+    static void __fastcall ReleaseInstance();
+
+    // Methods
+    void __fastcall SetThemeMode(TEddyThemeMode mode);
+    void __fastcall ToggleTheme(); // 다크<->라이트 전환
+
+    // Properties
+    // 현재 활성화된 팔레트를 반환 (읽기 전용)
+    const TEddyPalette &__fastcall GetPalette() const;
+
+    // 현재 모드 확인
+    __property TEddyThemeMode Mode = {read = currentMode_};
+};
+
+#endif
+

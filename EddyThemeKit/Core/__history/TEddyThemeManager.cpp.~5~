@@ -1,0 +1,50 @@
+//---------------------------------------------------------------------------
+
+#pragma hdrstop
+
+#include "TEddyThemeManager.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+
+TEddyThemeManager::TEddyThemeManager()
+{
+    InitPalettes();
+    currentMode_ = TEddyTHemeMode::Light;
+}
+
+void __fastcall TEddyThemeManager::InitPalettes()
+{
+    // 1. Light Theme Palette (WinForms/Standard Style)
+    lightPalette_.Background = (TColor)0x00F0F0F0; // 연한 회색 배경
+    lightPalette_.Surface = clWhite;               // 컨트롤은 흰색
+    lightPalette_.Text = (TColor)0x00202020;       // 짙은 회색 (가독성)
+    lightPalette_.TextSecondary = (TColor)0x00808080;
+    lightPalette_.Border = (TColor)0x00D0D0D0;
+    lightPalette_.Accent = (TColor)0x00D77800; // Standard Blue
+    lightPalette_.Hover = (TColor)0x00E8E8E8;
+
+    // 2. Dark Theme Palette (VS Code / Modern Dark Style)
+    darkPalette_.Background = (TColor)0x00202020;
+    darkPalette_.Surface = (TColor)0x002D2D2D;
+    darkPalette_.Text = (TColor)0x00E0E0E0;
+    darkPalette_.TextSecondary = (TColor)0x00A0A0A0;
+    darkPalette_.Border = (TColor)0x00454545;
+    darkPalette_.Accent = (TColor)0x00FF901E; // Vivid Blue
+    darkPalette_.Hover = (TColor)0x003C3C3C;
+}
+
+TEddyThemeManager::TEddyThemeManager *__fastcall TEddyThemeManager::Instance()
+{
+    if (pInstance_ == nullptr) pInstance_ = new TEddyThemeManager();
+    return pInstance_;
+}
+
+void __fastcall TEddyThemeManager::ReleaseInstance()
+{
+    if (pInstance_)
+    {
+        delete pInstance_;
+        pInstance_ = nullptr;
+    }
+}
+

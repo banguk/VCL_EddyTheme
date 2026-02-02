@@ -1,0 +1,112 @@
+//---------------------------------------------------------------------------
+
+#pragma hdrstop
+
+#include "TEddyBaseControl.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+
+__fastcall TEddyBaseControl::TEddyBaseControl(TComponent *Owner)
+    : TCustomControl(Owner), isMouseOver_(false), isFocused_(false), isMouseDown_(false)
+{
+    // 더블 버퍼링: 깜빡임 없는 부드러운 렌더링을 위해 필수
+    this->DoubleBuffered = true;
+
+    // 기본 포커스 동작 설정
+    this->TabStop = true;
+}
+
+__fastcall TEddyBaseControl::~TEddyBaseControl()
+{
+}
+
+void __fastcall TEddyBaseControl::CMMouseEnter(TMessage &Message)
+{
+    isMouseOver_ = true;
+    Invalidate();                       // Hover 효과를 위해 다시 그리기
+    TCustomControl::Dispatch(&Message); // OnMouseEnter 이벤트 발생
+}
+
+void __fastcall TEddyBaseControl::CMMouseLeave(TMessage &Message)
+{
+    isMouseOver_ = false;
+    isMouseDown_ = false; // 밖으로 나가면 클릭 상태도 해제하는 것이 일반적
+    Invalidate();
+    TCustomControl::Dispatch(&Message); // OnMouseLeave 이벤트 발생
+}
+
+void __fastcall TEddyBaseControl::MouseDown(TMouseButton Button, TShiftState Shift, int X, int Y)
+{
+    if (Button == mbLeft)
+    {
+        isMouseDown_ = true;
+        // 포커스 획득 (WinForms/WPF 동작 모방)
+        if (this->CanFocus()) this->SetFocus();
+        Invalidate();
+    }
+    TCustomControl::MouseDown(Button, Shift, X, Y);
+}
+//---------------------------------------------------------------------------
+void __fastcall TEddyBaseControl::MouseUp(TMouseButton Button, TShiftState Shift, int X, int Y)
+{
+    if (Button == mbLeft)
+    {
+        isMouseDown_ = false;
+        Invalidate();
+    }
+    TCustomControl::MouseUp(Button, Shift, X, Y);
+}
+
+void __fastcall TEddyBaseControl::WMSetFocus(TWMSetFocus &Message)
+{
+    isFocused_ = true;
+    Invalidate();
+    TCustomControl::Dispatch(&Message);
+}
+//---------------------------------------------------------------------------
+void __fastcall TEddyBaseControl::WMKillFocus(TWMKillFocus &Message)
+{
+    isFocused_ = false;
+    Invalidate();
+    TCustomControl::Dispatch(&Message);
+}
+//---------------------------------------------------------------------------
+void __fastcall TEddyBaseControl::WMEraseBkgnd(TWMEraseBkgnd &Message)
+{
+    // VCL 기본 배경 지우기를 차단하여 깜빡임 제거 (DoubleBuffered와 함께 사용)
+    Message.Result = 1;
+}
+
+void __fastcall TEddyBaseControl::Paint()
+{
+    TCanvas *pCanvas = this->Canvas;
+    const TRect rect = this->ClientRect;
+
+    // 1. 테마 팔레트 가져오기
+    TEddyThemeManager *pTheme = GetTheme();
+    const TEddyPalette &palette = pTheme->GetPalette();
+
+    // 2. 배경 지우기 및 채우기
+    // 상태에 따라 미세하게 다른 배경색을 적용할 수도 있음 (여기선 기본 로직)
+    pCanvas->Brush->Style = bsSolid;
+    pCanvas->Brush->Color = palette.Background; // 폼 배경과 일치시킴
+    pCanvas->FillRect(rect);
+
+    // 3. 자식 컨트롤의 콘텐츠 그리기 (Delegate)
+    PaintContent(pCanvas, rect);
+
+    // 4. (옵션) 포커스 사각형 그리기 - 접근성(Accessibility)을 위해 중요
+    if (isFocused_ && this->TabStop)
+    {
+        pCanvas->Brush->Style = bsClear;
+        pCanvas->Pen->Color = palette.Accent;
+        pCanvas->Pen->Style = psDot;
+        pCanvas->Rectangle(rect);
+    }
+}
+
+TEddyThemeManager *__fastcall TEddyBaseControl::GetTheme()
+{
+    return TEddyThemeManager::Instance();
+}
+

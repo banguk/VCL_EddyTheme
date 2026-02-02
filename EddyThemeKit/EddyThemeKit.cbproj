@@ -58,11 +58,13 @@
         <ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\release\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
         <ProjectType>CppPackage</ProjectType>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
-        <ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
         <ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
+        <ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
         <_TCHARMapping>char</_TCHARMapping>
         <Multithreaded>true</Multithreaded>
         <SanitizedProjectName>EddyThemeKit</SanitizedProjectName>
+        <IncludePath>Core\;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>Core\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <PackageImports>adortl;AdvChartLinkPkgDXE15;AdvChartPkgDEDXE15;AdvChartPkgDXE15;appanalytics;bcbie;bcbsmp;bindcomp;bindcompdbx;bindcompfmx;bindcompvcl;bindcompvclsmp;bindcompvclwinx;bindengine;CloudService;CustomIPTransport;DataSnapClient;DataSnapCommon;DataSnapConnectors;DatasnapConnectorsFreePascal;DataSnapFireDAC;DataSnapIndy10ServerTransport;DataSnapNativeClient;DataSnapProviderClient;DataSnapServer;DataSnapServerMidas;dbexpress;dbrtl;dbxcds;DbxClientDriver;DbxCommonDriver;DBXDb2Driver;DBXFirebirdDriver;DBXInformixDriver;DBXInterBaseDriver;DBXMSSQLDriver;DBXMySQLDriver;DBXOdbcDriver;DBXOracleDriver;DBXSqliteDriver;DBXSybaseASADriver;DBXSybaseASEDriver;dsnap;dsnapcon;dsnapxml;emsclient;emsclientfiredac;emsedge;emshosting;emsserverresource;FireDAC;FireDACADSDriver;FireDACASADriver;FireDACCommon;FireDACCommonDriver;FireDACCommonODBC;FireDACDb2Driver;FireDACDBXDriver;FireDACDSDriver;FireDACIBDriver;FireDACInfxDriver;FireDACMongoDBDriver;FireDACMSAccDriver;FireDACMSSQLDriver;FireDACMySQLDriver;FireDACODBCDriver;FireDACOracleDriver;FireDACPgDriver;FireDACSqliteDriver;FireDACTDataDriver;fmx;fmxase;fmxdae;fmxFireDAC;fmxobj;FMXTee;FmxTeeUI;frControlsLibrary29;frCoreLibrary29;frGraphicsLibrary29;frLanguageArabic29;frLanguageBrazil129;frLanguageBrazil229;frLanguageBrazil29;frLanguageBulgarian29;frLanguageCatalon29;frLanguageChinese29;frLanguageCroatian29;frLanguageCzech29;frLanguageDanish29;frLanguageDutch29;frLanguageFarsi29;frLanguageFrench29;frLanguageGerman29;frLanguageGreek29;frLanguageHebrew29;frLanguageHungarian29;frLanguageIndonesian29;frLanguageItalian29;frLanguageJapanese29;frLanguageLatvian29;frLanguageLithuanian29;frLanguagePolish29;frLanguagePortuguese29;frLanguageRomanian29;frLanguageRussian29;frLanguageSerbian29;frLanguageSlovak29;frLanguageSlovene29;frLanguageSpanish29;frLanguageSwedish29;frLanguageSwiss29;frLanguageTaiwan29;frLanguageTurkish29;frLanguageUkrainian29;frLocalizationLibrary29;frx29;frxADO29;frxDB29;frxDBX29;frxe29;frxFD29;frxHTML29;frxIBX29;frxPDF29;frxTee29;fs29;fsADO29;fsDB29;fsFD29;fsIBX29;fsTee29;ibmonitor;ibxbindings;ibxpress;IndyCore;IndyIPClient;IndyIPCommon;IndyIPServer;IndyProtocols;IndySystem;inet;inetdb;inetdbxpress;RESTBackendComponents;RESTComponents;rtl;Skia;soapmidas;soaprtl;soapserver;Tee;TeeDB;TeeUI;tethering;TMSVCLUIPackPkgDXE15;TMSVCLUIPackPkgExDXE15;TMSVCLUIPackPkgWizDXE15;TMSVCLUIPackPkgXlsDXE15;vacommpkgdedXE15;vacommpkgdXE15;vcl;vclactnband;vcldb;vcldsnap;vcledge;vclFireDAC;vclib;vclie;vclimg;VCLRESTComponents;VclSmp;vcltouch;vclwinx;vclx;xmlrtl;$(PackageImports)</PackageImports>
@@ -111,6 +113,17 @@
         <BCC_UseClassicCompiler>false</BCC_UseClassicCompiler>
     </PropertyGroup>
     <ItemGroup>
+        <PackageImport Include="vcl.bpi">
+            <BuildOrder>5</BuildOrder>
+        </PackageImport>
+        <CppCompile Include="Core\TEddyBaseControl.cpp">
+            <DependentOn>Core\TEddyBaseControl.h</DependentOn>
+            <BuildOrder>4</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Core\TEddyThemeManager.cpp">
+            <DependentOn>Core\TEddyThemeManager.h</DependentOn>
+            <BuildOrder>3</BuildOrder>
+        </CppCompile>
         <CppCompile Include="EddyThemeKit.cpp">
             <BuildOrder>0</BuildOrder>
         </CppCompile>

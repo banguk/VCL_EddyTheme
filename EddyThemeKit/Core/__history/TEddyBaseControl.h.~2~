@@ -1,0 +1,19 @@
+//---------------------------------------------------------------------------
+
+#ifndef TEddyBaseControlH
+#define TEddyBaseControlH
+//---------------------------------------------------------------------------
+#include "EddyThemeManager.h"
+#include <System.Classes.hpp>
+#include <Vcl.Controls.hpp>
+#include <Vcl.Graphics.hpp>
+
+class PACKAGE TEddyBaseControl : public TCustomControl
+{
+  private:
+    bool isMouseOver_;
+    bool isFocused_;
+    bool isMouseDown_
+};
+#endif
+
