@@ -62,8 +62,8 @@
         <ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
         <_TCHARMapping>char</_TCHARMapping>
         <Multithreaded>true</Multithreaded>
-        <IncludePath>D:\[001]_Project\[PP]_Project\EddyTheme\;$(IncludePath)</IncludePath>
-        <ILINK_LibraryPath>D:\[001]_Project\[PP]_Project\EddyTheme\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <IncludePath>Controls\;Core\;D:\[001]_Project\[PP]_Project\EddyTheme\;$(IncludePath)</IncludePath>
+        <ILINK_LibraryPath>Controls\;Core\;D:\[001]_Project\[PP]_Project\EddyTheme\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <SanitizedProjectName>EddyThemeKit</SanitizedProjectName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
@@ -113,6 +113,21 @@
         <BCC_UseClassicCompiler>false</BCC_UseClassicCompiler>
     </PropertyGroup>
     <ItemGroup>
+        <PackageImport Include="vcl.bpi">
+            <BuildOrder>5</BuildOrder>
+        </PackageImport>
+        <CppCompile Include="Controls\TEddyButton.cpp">
+            <DependentOn>Controls\TEddyButton.h</DependentOn>
+            <BuildOrder>6</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Core\EddyThemeManager.cpp">
+            <DependentOn>Core\EddyThemeManager.h</DependentOn>
+            <BuildOrder>3</BuildOrder>
+        </CppCompile>
+        <CppCompile Include="Core\TEddyBaseControl.cpp">
+            <DependentOn>Core\TEddyBaseControl.h</DependentOn>
+            <BuildOrder>4</BuildOrder>
+        </CppCompile>
         <CppCompile Include="EddyThemeKit.cpp">
             <BuildOrder>0</BuildOrder>
         </CppCompile>

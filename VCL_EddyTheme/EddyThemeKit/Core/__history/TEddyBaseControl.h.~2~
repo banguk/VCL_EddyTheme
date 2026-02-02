@@ -1,0 +1,13 @@
+//---------------------------------------------------------------------------
+
+#ifndef TEddyBaseControlH
+#define TEddyBaseControlH
+//---------------------------------------------------------------------------
+#include "EddyThemeManager.h"
+#include <System.Classes.hpp>
+#include <Vcl.Controls.hpp>
+
+class PACKAGE TEddyBaseControl : public TCustomControl
+
+#endif
+

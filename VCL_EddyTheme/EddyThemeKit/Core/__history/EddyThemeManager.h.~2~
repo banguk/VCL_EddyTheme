@@ -1,0 +1,13 @@
+//---------------------------------------------------------------------------
+
+#ifndef EddyThemeManagerH
+#define EddyThemeManagerH
+//---------------------------------------------------------------------------
+#endif
+
+class PACKAGE TEddyThemeManager
+{
+  private:
+        static TEddyThemeManager* pInstance_;
+};
+

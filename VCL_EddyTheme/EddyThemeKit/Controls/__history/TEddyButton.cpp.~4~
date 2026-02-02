@@ -1,0 +1,21 @@
+//---------------------------------------------------------------------------
+
+#pragma hdrstop
+
+#include "TEddyButton.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+
+__fastcall TEddyButton::TEddyButton(TComponent *Owner) : TEddyBaseControl(Owner)
+{
+    // 초기 설정
+    Width = 120;
+    Height = 40;
+    Cursor = crHandPoint; // 마우스를 올리면 손가락 모양으로 변경
+    state_ = TButtonState::Normal;
+}
+
+__fastcall TEddyButton::~TEddyButton()
+{
+}
+

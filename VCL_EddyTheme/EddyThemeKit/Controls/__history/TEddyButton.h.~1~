@@ -1,0 +1,13 @@
+//---------------------------------------------------------------------------
+
+#ifndef TEddyButtonH
+#define TEddyButtonH
+//---------------------------------------------------------------------------
+
+
+class PACKAGE TEddyButton : public TEddyBaseControl
+{
+
+};
+
+#endif

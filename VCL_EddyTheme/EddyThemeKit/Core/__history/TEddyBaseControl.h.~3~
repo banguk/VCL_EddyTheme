@@ -1,0 +1,30 @@
+//---------------------------------------------------------------------------
+
+#ifndef TEddyBaseControlH
+#define TEddyBaseControlH
+//---------------------------------------------------------------------------
+#include "EddyThemeManager.h"
+#include <System.Classes.hpp>
+#include <Vcl.Controls.hpp>
+
+class PACKAGE TEddyBaseControl : public TCustomControl
+{
+  __published: // [프로퍼티 노출] IDE 인스펙터 창에 보일 속성들
+    __property Align;
+    __property Anchors;
+    __property Cursor;
+    __property Enabled;
+    __property Font;
+    __property Visible;
+    __property ParentFont;
+
+    // 표준 마우스 이벤트 노출
+    __property OnClick;
+    __property OnMouseEnter;
+    __property OnMouseLeave;
+    __property OnMouseDown;
+    __property OnMouseUp;
+};
+
+#endif
+

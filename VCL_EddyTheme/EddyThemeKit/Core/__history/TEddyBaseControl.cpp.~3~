@@ -1,0 +1,18 @@
+//---------------------------------------------------------------------------
+
+#pragma hdrstop
+
+#include "TEddyBaseControl.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+
+__fastcall TEddyBaseControl::TEddyBaseControl(TComponent *Owner) : TCustomControl(Owner)
+{
+    // [성능/품질] 화면 깜빡임 제거를 위해 더블 버퍼링 활성화
+    DoubleBuffered = true;
+
+    // 기본 크기 설정 (안 하면 0x0이라 화면에 안 보여서 당황하게 됨)
+    Width = 100;
+    Height = 40;s
+}
+
