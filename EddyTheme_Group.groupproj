@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{E9DB61D9-7F53-43CB-85C6-0CE921006B90}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="EddyThemeKit\EddyThemeKit.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Tester\EddyThemeTester.cbproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="EddyThemeKit">
+        <MSBuild Projects="EddyThemeKit\EddyThemeKit.cbproj"/>
+    </Target>
+    <Target Name="EddyThemeKit:Clean">
+        <MSBuild Projects="EddyThemeKit\EddyThemeKit.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="EddyThemeKit:Make">
+        <MSBuild Projects="EddyThemeKit\EddyThemeKit.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="EddyThemeTester">
+        <MSBuild Projects="Tester\EddyThemeTester.cbproj"/>
+    </Target>
+    <Target Name="EddyThemeTester:Clean">
+        <MSBuild Projects="Tester\EddyThemeTester.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="EddyThemeTester:Make">
+        <MSBuild Projects="Tester\EddyThemeTester.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="EddyThemeKit;EddyThemeTester"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="EddyThemeKit:Clean;EddyThemeTester:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="EddyThemeKit:Make;EddyThemeTester:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
