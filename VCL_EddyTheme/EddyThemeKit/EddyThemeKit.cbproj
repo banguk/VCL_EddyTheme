@@ -117,9 +117,6 @@
         <BCC_UseClassicCompiler>false</BCC_UseClassicCompiler>
     </PropertyGroup>
     <ItemGroup>
-        <PackageImport Include="vcl.bpi">
-            <BuildOrder>5</BuildOrder>
-        </PackageImport>
         <CppCompile Include="Controls\TEddyButton.cpp">
             <DependentOn>Controls\TEddyButton.h</DependentOn>
             <BuildOrder>6</BuildOrder>
@@ -141,6 +138,9 @@
         </PCHCompile>
         <PackageImport Include="rtl.bpi">
             <BuildOrder>1</BuildOrder>
+        </PackageImport>
+        <PackageImport Include="vcl.bpi">
+            <BuildOrder>5</BuildOrder>
         </PackageImport>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>

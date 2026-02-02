@@ -4,6 +4,7 @@
 
 #include "TEddyButton.h"
 //---------------------------------------------------------------------------
+
 #pragma package(smart_init)
 
 __fastcall TEddyButton::TEddyButton(TComponent *Owner) : TEddyBaseControl(Owner)

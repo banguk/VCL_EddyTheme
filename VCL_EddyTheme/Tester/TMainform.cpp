@@ -5,6 +5,9 @@
 
 #include "TMainform.h"
 //---------------------------------------------------------------------------
+// #pragma comment(lib, "EddyThemeKit.bpi")
+
+//-------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 TForm1 *Form1;

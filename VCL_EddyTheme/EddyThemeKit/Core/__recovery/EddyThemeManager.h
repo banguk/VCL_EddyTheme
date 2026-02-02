@@ -1,0 +1,36 @@
+//---------------------------------------------------------------------------
+
+#ifndef EddyThemeManagerH
+#define EddyThemeManagerH
+//---------------------------------------------------------------------------
+
+#include <System.Classes.hpp>
+#include <Vcl.Graphics.hpp>
+
+class PACKAGE TEddyThemeManager
+{
+  private:
+    static TEddyThemeManager *pInstance_;
+
+    // [Private Members] 실제 색상 데이터
+    TColor primaryColor_;    // 브랜드 메인 색상 (버튼 배경 등)
+    TColor backgroundColor_; // 컨트롤 배경색
+    TColor textColor_;       // 글자 색상
+
+    TEddyThemeManager();
+
+  public:
+    static TEddyThemeManager *__fastcall GetInstance();
+
+    void __fastcall SetPrimaryColor(TColor color);
+    TColor __fastcall GetPrimaryColor();
+
+    void __fastcall SetBackgroundColor(TColor color);
+    TColor __fastcall GetBackgroundColor();
+
+    void __fastcall SetTextColor(TColor color);
+    TColor __fastcall GetTextColor();
+};
+
+#endif
+

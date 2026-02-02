@@ -5,6 +5,13 @@
 //---------------------------------------------------------------------------
 #include "../Core/TEddyBaseControl.h"
 
+//---------------------------------------------------------------------------
+// [Auto-Linking] 이 헤더를 include 하는 순간
+// IDE가 자동으로 EddyThemeKit.bpi 패키지를 링크하도록 명령함
+#if !defined(NO_IMPLICIT_LINK)
+#pragma comment(lib, "EddyThemeKit.bpi")
+#endif
+//---------------------------------------------------------------------------
 
 class PACKAGE TEddyButton : public TEddyBaseControl
 {
