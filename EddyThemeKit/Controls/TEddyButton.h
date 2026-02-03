@@ -5,6 +5,10 @@
 //---------------------------------------------------------------------------
 #include "Core\TEddyBaseControl.h"
 
+#if !defined(BUILDING_EDDYTHEMEKIT) // 패키지를 만드는 중이 아닐 때만
+#pragma link "EddyThemeKit.bpi"
+#endif
+
 class PACKAGE TEddyButton : public TEddyBaseControl
 {
   private:
@@ -24,7 +28,7 @@ class PACKAGE TEddyButton : public TEddyBaseControl
 
   __published:
     // 표준 버튼 속성 노출
-    __property Caption;     // 버튼 텍스트
+    __property Caption; // 버튼 텍스트
 
     // BaseControl에서 상속받은 속성들 다시 명시 (필요시)
     __property TabStop;
