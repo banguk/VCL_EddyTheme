@@ -1,0 +1,16 @@
+//---------------------------------------------------------------------------
+
+#pragma hdrstop
+
+#include "TEddyButton.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+
+__fastcall TEddyButton::TEddyButton(TComponent *Owner)
+{
+    // 버튼의 기본 크기 및 설정
+    this->Width = 100;
+    this->Height = 35;
+    this->Cursor = crHandPoint; // 마우스 오버 시 손가락 커서
+}
+

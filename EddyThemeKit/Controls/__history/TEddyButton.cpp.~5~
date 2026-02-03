@@ -1,0 +1,87 @@
+//---------------------------------------------------------------------------
+
+#pragma hdrstop
+
+#include "TEddyButton.h"
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+
+__fastcall TEddyButton::TEddyButton(TComponent *Owner) : TEddyBaseControl(Owner)
+{
+    // 버튼의 기본 크기 및 설정
+    this->Width = 100;
+    this->Height = 35;
+    this->Cursor = crHandPoint; // 마우스 오버 시 손가락 커서
+}
+__fastcall TEddyButton::~TEddyButton()
+{
+}
+
+void __fastcall TEddyButton::PaintContent(TCanvas *pCanvas, const TRect &rect)
+{
+    TEddyThemeManager *pTheme = GetTheme();
+    const TEddyPalette &palette = pTheme->GetPalette();
+
+    // 1. 상태에 따른 색상 결정 (State Machine)
+    TColor finalBackColor = palette.Surface; // 기본: Surface 색상
+    TColor finalBorderColor = palette.Border;
+    TColor finalTextColor = palette.Text;
+
+    if (!Enabled)
+    {
+        // 비활성화 상태
+        finalBackColor = pTheme->Mode == TEddyThemeMode::Light ? (TColor)0x00E0E0E0 : (TColor)0x00303030;
+        finalTextColor = palette.TextSecondary;
+    }
+    else if (IsMouseDown) // 클릭 중 (가장 우선순위 높음)
+    {
+        finalBackColor = palette.Accent;
+        finalTextColor = clWhite; // 강조색 배경엔 흰 글씨가 국룰
+        finalBorderColor = palette.Accent;
+    }
+    else if (IsMouseOver) // 마우스 오버
+    {
+        finalBackColor = palette.Hover;
+        finalBorderColor = palette.Accent; // 테두리로 살짝 강조
+    }
+
+    // 2. 배경 그리기 (Round Rectangle)
+    pCanvas->Brush->Color = finalBackColor;
+    pCanvas->Brush->Style = bsSolid;
+    pCanvas->Pen->Color = finalBorderColor;
+    pCanvas->Pen->Style = psSolid;
+
+    // 둥근 모서리 처리 (반경 4px)
+    pCanvas->RoundRect(rect.Left, rect.Top, rect.Right, rect.Bottom, 4, 4);
+
+    // 3. 텍스트 그리기 (가운데 정렬)
+    pCanvas->Font->Assign(this->Font);
+    pCanvas->Font->Color = finalTextColor;
+
+    // 텍스트 영역 계산 및 그리기
+    TRect textRect = rect;
+    // VCL의 DrawText API를 사용하여 수직/수평 중앙 정렬
+    DrawText(pCanvas->Handle, this->Caption.c_str(), -1, &textRect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+}
+//---------------------------------------------------------------------------
+void __fastcall TEddyButton::KeyDown(WORD &Key, TShiftState Shift)
+{
+    // 스페이스바를 누르면 눌린 효과(MouseDown 상태)를 냄
+    if (Key == VK_SPACE)
+    {
+        // 강제로 MouseDown 메시지를 보내거나 상태를 흉내낼 수 있음
+        // 여기서는 간단히 처리 (실제로는 복잡한 상태 관리가 필요할 수 있음)
+    }
+    TEddyBaseControl::KeyDown(Key, Shift);
+}
+//---------------------------------------------------------------------------
+void __fastcall TEddyButton::KeyUp(WORD &Key, TShiftState Shift)
+{
+    // 스페이스바나 엔터를 떼면 클릭 이벤트 발생
+    if (Key == VK_SPACE || Key == VK_RETURN)
+    {
+        Click();
+    }
+    TEddyBaseControl::KeyUp(Key, Shift);
+}
+

@@ -50,7 +50,7 @@ class PACKAGE TEddyBaseControl : public TCustomControl
     END_MESSAGE_MAP(TCustomControl)
 
   public:
-    __fastcall TEddyBaseControl(TComponent *Owner) override;
+    __fastcall TEddyBaseControl(TComponent *Owner);
     __fastcall ~TEddyBaseControl();
 
   __published:

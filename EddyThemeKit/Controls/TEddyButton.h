@@ -1,0 +1,33 @@
+//---------------------------------------------------------------------------
+
+#ifndef TEddyButtonH
+#define TEddyButtonH
+//---------------------------------------------------------------------------
+#include "Core\TEddyBaseControl.h"
+
+class PACKAGE TEddyButton : public TEddyBaseControl
+{
+  private:
+    // 버튼 고유의 속성이 필요하다면 여기에 추가 (예: CornerRadius 등)
+
+  protected:
+    // [핵심] 부모 클래스(BaseControl)가 요청하는 그리기 함수 구현
+    virtual void __fastcall PaintContent(TCanvas *pCanvas, const TRect &rect) override;
+
+    // 키보드 엔터/스페이스바로 버튼 클릭 지원
+    virtual void __fastcall KeyDown(WORD &Key, TShiftState Shift) override;
+    virtual void __fastcall KeyUp(WORD &Key, TShiftState Shift) override;
+
+  public:
+    __fastcall TEddyButton(TComponent *Owner);
+    __fastcall ~TEddyButton();
+
+  __published:
+    // 표준 버튼 속성 노출
+    __property Caption;     // 버튼 텍스트
+
+    // BaseControl에서 상속받은 속성들 다시 명시 (필요시)
+    __property TabStop;
+};
+#endif
+
